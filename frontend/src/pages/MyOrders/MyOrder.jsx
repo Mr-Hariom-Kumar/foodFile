@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { assets } from '../../assets/assets'
 
-const myOrder = () => {
+const MyOrder = () => {
 
     const {url,token}=useContext(StoreContext)
     const [data,setData]=useState([])
@@ -54,4 +54,4 @@ const myOrder = () => {
   )
 }
 
-export default myOrder
+export default MyOrder
