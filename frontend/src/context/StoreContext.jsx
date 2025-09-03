@@ -7,6 +7,8 @@ const StoreContextProvider=(props)=>{
     const url = "https://foodfile-backend.onrender.com"
     const [token,setToken]=useState("");
     const [food_list,setFoodList]= useState([])
+    const [discount, setDiscount] = useState(0)
+
 
     const addToCart= async (itemId)=>{
         if(!cartItems[itemId]){
@@ -66,7 +68,10 @@ const StoreContextProvider=(props)=>{
         getTotalCartAmount,
         url,
         token,
-        setToken
+        setToken,
+        discount,
+        setDiscount
+       
     }
     return (
         <StoreContext.Provider value={contextValue} >

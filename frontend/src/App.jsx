@@ -10,11 +10,13 @@ import Verify from './pages/Verify/Verify'
 import MyOrder from './pages/MyOrders/MyOrder'
 import './App.css'
 import Privacy from './pages/Privacy/Privacy'
+import { ToastContainer  } from 'react-toastify';
 
 const App = () => {
   const [showLogin, setShowLogin]=useState(false)
   return (
     <>
+       <ToastContainer/>
       {showLogin?<LoginPopup setShowLogin={setShowLogin}/>:<></>}
       <div className='app'>
       <Navbar setShowLogin={setShowLogin}/>

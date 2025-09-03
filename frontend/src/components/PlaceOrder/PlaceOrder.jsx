@@ -6,7 +6,7 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 const PlaceOrder = () => {
-    const {getTotalCartAmount,token,food_list,cartItems,url} = useContext(StoreContext);
+    const {getTotalCartAmount,token,food_list,cartItems,url,discount} = useContext(StoreContext);
     const [data,setData]=useState({
         firstName:"",
         lastName:"",
@@ -19,6 +19,9 @@ const PlaceOrder = () => {
         phone:""
     })
 
+    const subtotal = getTotalCartAmount();
+  const delivery = subtotal === 0 ? 0 : 2;
+  const finalTotal = Math.max(0, subtotal + delivery - discount);
 
     const onChangeHandler=(event)=>{
         const name=event.target.name;
@@ -39,7 +42,7 @@ const PlaceOrder = () => {
         let orderData={
             address:data,
             items:orderItems,
-            amount:getTotalCartAmount()+2,
+            amount:finalTotal,
         }
         let response = await axios.post(url+"/api/order/place",orderData,{headers:{token}}) 
         if(response.data.success){
@@ -100,7 +103,7 @@ const PlaceOrder = () => {
                 </div>
                 <div className="cart-total-details">
                     <p>Total</p>
-                    <p>${getTotalCartAmount()===0?0:getTotalCartAmount()+2}</p>
+                    <p>${getTotalCartAmount()===0?0:finalTotal}</p>
                 </div>
                     <button type='submit'>PROCEED TO PAYMENT</button>
 

@@ -1,12 +1,41 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './Cart.css'
 import { StoreContext } from '../../context/StoreContext'
 import { useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify'
 
 const Cart = () => {
   
-  const  {cartItems,food_list,removeFromCart,getTotalCartAmount,url} = useContext(StoreContext);
+  const  {cartItems,food_list,removeFromCart,getTotalCartAmount,url,discount,setDiscount} = useContext(StoreContext);
   const navigate=useNavigate();
+  const [value,setValue]=useState("")
+  const promoDiscount=(code)=>{
+    if(code.length !== 7){
+      toast.error("Invalid promocode")
+      setValue("")
+    }else if(code.substring(0,5)==="PROMO"){
+        let discValue=parseInt(code.substring(5))
+        if(!isNaN(discValue)){
+
+          if(discValue<getTotalCartAmount()){
+            setDiscount(discValue)
+            toast.success(`Congratulations! You got flat $${discValue} discount`)
+          }else{
+            toast.error(`Add item of ${getTotalCartAmount()-discValue+2} $ to access this coupan`)
+          }
+        }
+        
+        setValue("")
+    }else{
+        toast.error("Invalid promocode")
+    }
+  }
+
+  const subtotal = getTotalCartAmount();
+  const delivery = subtotal === 0 ? 0 : 2;
+  let finalTotal = subtotal + delivery;
+  finalTotal = Math.max(0, finalTotal - discount);
+
   return (
     <div className='cart'>
       <div className="cart-items">
@@ -41,33 +70,44 @@ const Cart = () => {
         }
       })}
       <div className="cart-bottom">
+
+          <div className="card-promo">
+            <div>
+                <p>If you have promocode,Enter it here</p>
+                <div className="cart-promocode-input">
+                  <input 
+                    type='text' 
+                    placeholder='i.e PROMO10'
+                    value={value}
+                    onChange={(event)=>setValue(event.target.value)}
+                  ></input>
+                  <button onClick={()=>promoDiscount(value)}>Submit</button>
+                </div>
+            </div>
+          </div>
+          
+
           <div className="cart-total">
             <h2>Cart Totals</h2>
           
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>${subtotal}</p>
             </div>
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>${getTotalCartAmount()===0?0:2}</p>
+              <p>${delivery}</p>
             </div>
             <div className="cart-total-details">
                 <p>Total</p>
-                <p>${getTotalCartAmount()===0?0:getTotalCartAmount()+2}</p>
+                <p>${finalTotal}</p>
+               
+                
             </div>
             <button onClick={()=>navigate('/order')} >PROCEED TO CHECKOUT</button>
 
           </div>
-          <div className="card-promo">
-            <div>
-                <p>If you have promocode,Enter it here</p>
-                <div className="cart-promocode-input">
-                  <input type='text' placeholder='Enter Code'></input>
-                  <button>Submit</button>
-                </div>
-            </div>
-          </div>
+          
       </div>
 
     </div>
