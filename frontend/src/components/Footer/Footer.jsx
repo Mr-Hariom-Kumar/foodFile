@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import './Footer.css'
 import { assets } from '../../assets/assets'
 const Footer = () => {
@@ -17,10 +18,10 @@ const Footer = () => {
         <div className="footer-content-center">
             <h2>COMPANY</h2>
             <ul>
-                <li>Home</li>
-                <li>About us</li>
-                <li>Delivery</li>
-                <li>Privacy Policy</li>
+                <a href='https://food-file-4wl3.vercel.app/'><li>Home</li></a>
+                <Link to='/privacy-policy'><li>About us</li></Link>
+                <Link to='/privacy-policy'><li>Delivery Policy</li></Link>
+                <Link to='/privacy-policy'><li>Privacy Policy</li></Link>
             </ul>
         </div>
         <div className="footer-content-right">

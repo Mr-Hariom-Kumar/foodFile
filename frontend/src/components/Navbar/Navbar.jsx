@@ -15,7 +15,7 @@ const Navbar = ({setShowLogin}) => {
     const admin_url="https://foodfile-admin.onrender.com/"
   return (
     <div className='navbar'>
-       <Link to='/'><img src={assets.logo} alt="logo"/></Link> 
+      <a href='https://food-file-4wl3.vercel.app/'><img src={assets.logo} alt="logo"/></a>
         <ul className='navbar-menu'>
             <Link to='/'><li onClick={()=>setMenu("home")} className={menu==="home"?"active":""}>home</li></Link>
             <a href='#explore-menu'><li onClick={()=>setMenu("menu")} className={menu==="menu"?"active":""}>menu</li></a>

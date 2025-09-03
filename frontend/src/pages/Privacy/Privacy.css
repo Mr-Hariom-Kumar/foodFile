@@ -1,0 +1,94 @@
+/* Privacy.css */
+*{
+    list-style-type: none;
+}
+#tomato-legal {
+  max-width: max(1000px,100vw);
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.1;
+}
+
+#tomato-legal h1 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  margin-top: 25px;
+}
+
+#tomato-legal h2 {
+  font-size: 1.4rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#tomato-legal p {
+  margin-bottom: 14px;
+  text-align: justify;
+}
+
+#tomato-legal ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+#tomato-legal li {
+  margin-bottom: 8px;
+}
+
+#tomato-legal hr {
+  margin: 30px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+#tomato-legal a {
+color: rgb(0, 128, 255);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#tomato-legal section {
+  margin-bottom: 40px;
+}
+
+#tomato-legal strong {
+  font-weight: 600;
+}
+
+
+@media (max-width: 768px) {
+  #tomato-legal {
+    width: 87vh !important;
+    padding: 18px;
+  }
+
+  #tomato-legal h1 {
+    font-size: 1.5rem;
+  }
+
+  #tomato-legal h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 440px) {
+    
+    #tomato-legal {
+    padding: 15px;  /* ✅ more padding to avoid edge compression */
+  }
+
+  #tomato-legal h1 {
+    font-size: 1.3rem;
+  }
+
+  #tomato-legal h2 {
+    font-size: 1.05rem;
+  }
+
+  #tomato-legal p,
+  #tomato-legal li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
