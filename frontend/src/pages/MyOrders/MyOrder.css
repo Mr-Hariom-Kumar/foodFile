@@ -1,0 +1,10 @@
+.logreq{
+     display: grid;
+    place-items: center;   /* centers both axes */
+      min-height: 60vh;
+    padding: 16px;
+      text-align: center;
+    font-size: xx-large;
+    font-weight: 600;
+    color: #615c5c;
+}

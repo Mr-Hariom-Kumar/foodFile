@@ -3,6 +3,7 @@ import { StoreContext } from '../../context/StoreContext';
 import './PlaceOrder.css'
 import { useEffect } from 'react';
 import axios from 'axios';
+import {toast} from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 const PlaceOrder = () => {
     const {getTotalCartAmount,token,food_list,cartItems,url} = useContext(StoreContext);
@@ -17,6 +18,7 @@ const PlaceOrder = () => {
         country:"",
         phone:""
     })
+
 
     const onChangeHandler=(event)=>{
         const name=event.target.name;
@@ -39,7 +41,7 @@ const PlaceOrder = () => {
             items:orderItems,
             amount:getTotalCartAmount()+2,
         }
-        let response = await axios.post(url+"/api/order/place",orderData,{headers:{token}})
+        let response = await axios.post(url+"/api/order/place",orderData,{headers:{token}}) 
         if(response.data.success){
             const {session_url}=response.data;
             window.location.replace(session_url);
@@ -48,15 +50,21 @@ const PlaceOrder = () => {
             alert("Error");
         }
     }
+   
 
     const navigate= useNavigate();
-    useEffect(()=>{
-        if(!token){
-            navigate('/cart')
-        }else if(getTotalCartAmount===0){
-            navigate('/cart')
-        }
-    },[token])
+   useEffect(() => {
+    const checkCart = () => {
+      if (!token) {
+        alert("Oops! You are not signed in!");
+        navigate('/cart');
+      } else if (getTotalCartAmount() === 0) {
+        alert("Cart is Empty!");
+        navigate('/cart');
+      }
+    };
+    checkCart();
+  }, [token, getTotalCartAmount, navigate]);
   return (
     <div>
         <form onSubmit={placeOrder} className='place-order'>
