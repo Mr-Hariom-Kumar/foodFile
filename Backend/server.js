@@ -33,11 +33,9 @@ app.use("/api/order",orderRouter)
 app.get("/",(req,res)=>{
     res.send("API WORKING")
 })
-console.log("JWT_SECRET from env:", process.env.JWT_SECRET);
 
 
 app.listen(port,()=>{
     console.log(`Server is running on port: ${port}`)
 })
 
-//mongodb+srv://766hariwork:Hari05052003@cluster0.7oskezr.mongodb.net/?

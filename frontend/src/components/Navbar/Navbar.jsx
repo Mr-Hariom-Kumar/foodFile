@@ -3,7 +3,10 @@ import './Navbar.css'
 import {assets} from  '../../assets/assets'
 import { Link } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
+import { useNavigate } from 'react-router-dom'
+
 const Navbar = ({setShowLogin}) => {
+    const navigate = useNavigate();
     const [menu,setMenu]=useState("home");
     const {getTotalCartAmount,token,setToken} = useContext(StoreContext);
     const logout = ()=>{
